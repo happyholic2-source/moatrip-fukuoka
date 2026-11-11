@@ -1,0 +1,29 @@
+{
+  "name": "moatrip",
+  "version": "0.5.0",
+  "private": true,
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "check": "tsc --noEmit",
+    "doctor": "expo-doctor"
+  },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "*",
+    "@supabase/supabase-js": "^2.58.0",
+    "expo": "^58.0.23",
+    "expo-clipboard": "*",
+    "expo-status-bar": "*",
+    "react": "19.3.0",
+    "react-native": "0.88.1",
+    "react-native-maps": "*",
+    "react-native-safe-area-context": "*",
+    "react-native-url-polyfill": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "typescript": "~5.9.2"
+  }
+}

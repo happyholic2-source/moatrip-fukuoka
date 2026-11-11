@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "모아트립",
+    "slug": "moatrip",
+    "version": "0.5.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.example.moatrip",
+      "config": {
+        "googleMapsApiKey": "YOUR_IOS_GOOGLE_MAPS_SDK_KEY"
+      }
+    },
+    "android": {
+      "package": "com.example.moatrip",
+      "config": {
+        "googleMaps": {
+          "apiKey": "YOUR_ANDROID_GOOGLE_MAPS_SDK_KEY"
+        }
+      }
+    },
+    "plugins": [
+      "react-native-maps"
+    ]
+  }
+}
