@@ -1,10 +1,11 @@
+import { supabase } from './lib/supabase';
 import React,{useEffect,useState} from 'react';
 import {Alert,ActivityIndicator,FlatList,KeyboardAvoidingView,Modal,Platform,Pressable,ScrollView,Share,StyleSheet,Text,TextInput,View} from 'react-native';
 import MapView,{Marker,Polyline,MapPressEvent,PROVIDER_GOOGLE} from 'react-native-maps';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {StatusBar} from 'expo-status-bar';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {configured,ensureAuth,supabase} from './src/backend';
+import {configured,ensureAuth} from './src/backend';
 import {Place,optimizeRoute,distanceKm} from './src/route';
 import {GooglePlace,searchFukuokaPlaces} from './src/google';
 import {makeTripPlan,TripPlan} from './src/itinerary';
@@ -14,6 +15,27 @@ const colors:Record<Place['category'],string>={'맛집':'#F28C62','카페':'#AE8
 const initial={latitude:33.5902,longitude:130.4017,latitudeDelta:0.15,longitudeDelta:0.17};
 const makeId=()=>`${Date.now()}-${Math.random().toString(36).slice(2,9)}`;
 export default function App(){
+
+useEffect(() => {
+  async function testConnection() {
+    try {
+      const { data, error } =
+        await supabase.auth.getUser();
+
+      if (error) {
+        console.log('인증 서버 응답:', error.message);
+      } else {
+        console.log('인증 서버 확인 완료');
+        console.log('사용자:', data.user?.id ?? '로그인 안 됨');
+      }
+    } catch (error) {
+      console.log('서버 연결 오류:', error);
+    }
+  }
+
+  testConnection();
+}, []);
+
  const [places,setPlaces]=useState<Place[]>([]),[room,setRoom]=useState(''),[roomInput,setRoomInput]=useState(''),[user,setUser]=useState('나'),[tab,setTab]=useState<'map'|'list'|'route'>('map');
  const [draft,setDraft]=useState<{latitude:number;longitude:number}|null>(null),[name,setName]=useState(''),[category,setCategory]=useState<Place['category']>('맛집');
  const [searchQuery,setSearchQuery]=useState(''),[searchResults,setSearchResults]=useState<GooglePlace[]>([]),[searching,setSearching]=useState(false);
